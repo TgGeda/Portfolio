@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Birhan Abuhay Jemere - Tech Instructor & Full Stack Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Light Theme */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --accent-primary: #007bff;
+    --accent-secondary: #0056b3;
+    --accent-light: #e6f2ff;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.07);
+    --shadow-color-hover: rgba(0, 0, 0, 0.12);
+  }
+
+  [data-theme="dark"] {
+    /* Dark Theme */
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent-primary: #4dabf7;
+    --accent-secondary: #228be6;
+    --accent-light: #1c3d5a;
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --shadow-color-hover: rgba(0, 0, 0, 0.3);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    scroll-behavior: smooth;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover, a:focus {
+    color: var(--accent-secondary);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Header & Navigation - REVISED LAYOUT */
+  .main-header {
+    background: var(--bg-secondary);
+    text-align: center;
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative; /* For positioning the theme switcher */
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .header-profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--accent-primary);
+    box-shadow: 0 5px 20px var(--shadow-color);
+    margin-bottom: 1rem;
+  }
+
+  .main-header h1 {
+    font-size: 2.25rem;
+    margin: 0;
+    color: var(--accent-primary);
+    font-weight: 700;
+  }
+
+  .main-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+    font-weight: 400;
+  }
+
+  .theme-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .theme-switcher:hover {
+    background: var(--accent-light);
+    color: var(--accent-primary);
+  }
+  #theme-icon-light { display: none; }
+  [data-theme="dark"] #theme-icon-light { display: block; }
+  [data-theme="dark"] #theme-icon-dark { display: none; }
+
+
+  nav {
+    background: var(--accent-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  nav a {
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+  }
+  nav a:hover, nav a:focus {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+
+  /* Main Content & Sections */
+  main {
+    padding-top: 2.5rem;
+  }
+  section {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-primary);
+    border-bottom: 3px solid var(--accent-primary);
+    padding-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  /* About Me Section */
+  #about p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+  }
+
+  /* Skills Section */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  .skill-category h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-secondary);
+    margin-bottom: 0.75rem;
+  }
+  .skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skills-list li {
+    background: var(--accent-light);
+    color: var(--accent-primary);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Project Filtering */
+  .filter-bar {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .filter-bar label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+  }
+  .filter-btn {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .filter-btn:hover {
+    background: var(--accent-light);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+  }
+  .filter-btn.active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+  }
+  
+  /* Projects Section */
+  .projects-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color-hover);
+  }
+  .project-card h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  .project-card .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .project-card .tech-tags span {
+    background-color: var(--accent-light);
+    color: var(--accent-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+  }
+  .project-card p {
+    flex-grow: 1;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+  .project-card .project-link {
+    display: inline-block;
+    background: var(--accent-primary);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  }
+  .project-card .project-link:hover {
+    background: var(--accent-secondary);
+    color: white;
+  }
+
+  /* Experience & Recognition */
+  .timeline {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    background: var(--bg-secondary);
+    border: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .timeline-item h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .timeline-item .meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .timeline-item ul {
+    padding-left: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  /* Certificate Gallery & Modal */
+  .certificate-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .certificate-thumbnail {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .certificate-thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px var(--shadow-color-hover);
+  }
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9);
+  }
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: auto;
+    max-width: 90%;
+    max-height: 85vh;
+  }
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+  }
+
+  /* Contact Form */
+  form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  form label {
+    font-weight: 600;
+    margin-bottom: -0.75rem;
+  }
+  form input, form textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  form input:focus, form textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-light);
+  }
+  form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  form button {
+    justify-self: start;
+    background: var(--accent-primary);
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+  }
+  form button:hover, form button:focus {
+    background: var(--accent-secondary);
+  }
+  .contact-links p {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .main-header h1 {
+        font-size: 1.75rem;
+    }
+    .theme-switcher {
+        top: 15px;
+        right: 15px;
+    }
+    nav { justify-content: space-around; }
+    h2 { font-size: 1.75rem; }
+    section { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="main-header">
+  <img src="profile.jpg" alt="Birhan Abuhay Jemere" class="header-profile-image">
+  <h1>Birhan Abuhay Jemere</h1>
+  <p>Tech Instructor | Full Stack Software Engineer | MSc In Computer Engineering | Cybersecurity hobbyist </p>
+  <button id="theme-toggle" class="theme-switcher" title="Toggle dark/light mode">
+    <span id="theme-icon-dark">☀️</span>
+    <span id="theme-icon-light">🌙</span>
+  </button>
+</header>
+
+<nav role="navigation" aria-label="Primary navigation">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#recognition">Recognition</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main class="container" role="main">
+
+  <section id="about" aria-labelledby="about-heading">
+    <h2 id="about-heading">About Me</h2>
+    <p>
+      I am a seasoned Computer Engineering professional and university instructor with over five years of experience blending rigorous academic expertise with hands-on technical proficiency. My passion for technology extends from mentoring the next generation of engineers to building robust, scalable software solutions.
+    </p>
+    <p>
+      As an ALX Africa certified Full Stack Software Engineer, I possess a versatile skill set in modern web development, with a keen interest and growing expertise in cybersecurity. I am driven by a commitment to fostering innovation, empowering students, and contributing to impactful technology projects.
+    </p>
+  </section>
+
+  <section id="experience" aria-labelledby="experience-heading">
+    <h2 id="experience-heading">Professional Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>University Instructor</h4>
+        <div class="meta">Debre Tabor University | Debre Tabor, Ethiopia | 2019 - Present</div>
+        <ul>
+          <li>Developed and delivered comprehensive curricula for undergraduate courses including Software Engineering, Data Structures & Algorithms, and AI Fundamentals.</li>
+          <li>Mentored over 200 students, providing academic guidance and career coaching, resulting in high rates of internship and job placement.</li>
+          <li>Led practical lab sessions, bridging theoretical concepts with hands-on application in programming and system design.</li>
+          <li>Received consistently positive student feedback for clear instruction and engaging teaching methodologies.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Technical Skills</h2>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h4>Backend Development</h4>
+        <ul class="skills-list">
+          <li>Node.js</li><li>Express.js</li><li>Python</li><li>Flask</li><li>RESTful API Design</li><li>Authentication</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>Frontend Development</h4>
+        <ul class="skills-list">
+          <li>React.js</li><li>JavaScript (ES6+)</li><li>HTML5</li><li>CSS3</li><li>Responsive Design</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>Databases & Storage</h4>
+        <ul class="skills-list">
+          <li>MongoDB</li><li>MySQL</li><li>Redis</li><li>NoSQL</li><li>Relational Databases</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>DevOps & Cloud</h4>
+        <ul class="skills-list">
+          <li>Docker</li><li>Git & GitHub</li><li>CI/CD</li><li>Cloud Platforms (AWS/GCP/Azure Basics)</li><li>Shell Scripting</li><li>Puppet</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>AI & Cybersecurity</h4>
+        <ul class="skills-list">
+          <li>Machine Learning</li><li>Deep Learning</li><li>Cybersecurity Fundamentals</li><li>Network Analysis</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>Core Competencies</h4>
+        <ul class="skills-list">
+          <li>Curriculum Development</li><li>Student Mentorship</li><li>Technical Writing</li><li>Agile Methodologies</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">Projects Showcase</h2>
+    <div class="filter-bar">
+      <label>Filter by:</label>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="Python">Python</button>
+      <button class="filter-btn" data-filter="Node.js">Node.js</button>
+      <button class="filter-btn" data-filter="React">React</button>
+      <button class="filter-btn" data-filter="DevOps">DevOps</button>
+    </div>
+
+    <div class="projects-grid">
+      <article class="project-card" data-tags="Node.js,MongoDB,Redis">
+        <h3>alx-files_manager</h3>
+        <div class="tech-tags">
+          <span>Node.js</span><span>Express</span><span>MongoDB</span><span>Redis</span><span>BullMQ</span>
+        </div>
+        <p>A scalable file management API for handling uploads, storage, and processing. It leverages Redis for caching and BullMQ for background job queues, ensuring high performance and reliability for asynchronous tasks like thumbnail generation and user notifications.</p>
+        <a href="https://github.com/TgGeda/alx-files_manager" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </article>
+
+      <article class="project-card" data-tags="Python,Flask">
+        <h3>User data management</h3>
+        <div class="tech-tags">
+          <span>Python</span><span>Flask</span><span>Authentication</span><span>API Security</span>
+        </div>
+        <p>A secure backend service for user data management, implementing multiple authentication strategies including Basic Auth and Session Auth. This project demonstrates a deep understanding of API security principles and user session handling in a Python environment.</p>
+        <a href="https://github.com/TgGeda/alx-backend-user-data" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </article>
+      
+      <article class="project-card" data-tags="React,Node.js,MongoDB">
+        <h3>University Admission System</h3>
+        <div class="tech-tags">
+          <span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span>
+        </div>
+        <p>A full-stack MERN application designed to streamline the university admissions process. It features role-based access control (RBAC) for administrators and applicants, an intuitive user interface, and an automated workflow for managing applications.</p>
+        <a href="https://github.com/TgGeda/university-admission-system" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </article>
+
+      <article class="project-card" data-tags="Python,DevOps">
+        <h3>ACL Management Tool</h3>
+        <div class="tech-tags">
+          <span>Python</span><span>Netmiko</span><span>RBAC</span><span>Network Automation</span>
+        </div>
+        <p>A CLI tool to securely automate Access Control List (ACL) management on network devices. It enhances security and efficiency by providing role-based access, rule validation, dry-run capabilities, and automated backups to prevent configuration errors.</p>
+        <a href="https://github.com/TgGeda/acl_management-tool" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </article>
+
+      <article class="project-card" data-tags="Python,Flask,MySQL">
+        <h3>AirBnB Clone v4</h3>
+        <div class="tech-tags">
+          <span>Python</span><span>Flask</span><span>MySQL</span><span>HTML/CSS</span>
+        </div>
+        <p>An advanced iteration of an AirBnB clone, featuring a command-line interpreter for backend management and a dynamic web interface built with Flask. The architecture supports data persistence across both JSON files and a MySQL database.</p>
+        <a href="https://github.com/TgGeda/AirBnB_clone_v4" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </article>
+
+      <article class="project-card" data-tags="DevOps">
+        <h3>System Engineering & DevOps</h3>
+        <div class="tech-tags">
+          <span>Shell</span><span>Puppet</span><span>Web Stack Debugging</span><span>DevOps</span>
+        </div>
+        <p>A comprehensive repository covering foundational DevOps skills. Includes projects on shell scripting, server configuration management with Puppet, web infrastructure design, and systematic debugging of web stacks, demonstrating a holistic approach to system management.</p>
+        <a href="https://github.com/TgGeda/alx-system_engineering-devops" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="recognition" aria-labelledby="recognition-heading">
+    <h2 id="recognition-heading">Education & Recognition</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>ALX SE Tutor Recognition</h4>
+        <div class="meta">ALX Africa | 2024</div>
+        <p>Recognized for outstanding dedication and service as a tutor, mentoring graduating cohorts through their Specialization Portfolio Projects.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Certificate, Full Stack Software Engineering</h4>
+        <div class="meta">ALX Africa | 2024</div>
+        <p>Completed a rigorous, project-based program covering both low-level programming (C) and modern full-stack development (Python, JavaScript, MERN stack, DevOps).</p>
+      </div>
+      <div class="timeline-item">
+        <h4>MSc, Computer Engineering</h4>
+        <div class="meta">Addis Ababa Science and Technology University | Graduated 2025</div>
+        <p>Specialized in advanced cybersecurity, with a thesis focused on assembly-to-open-source-code matching for reverse engineering and malware analysis. I have developed a sophisticated Asm2SrcMatcher complete installer software applicants</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 2.5rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">Certificates</h3>
+    <div class="certificate-gallery">
+      <a href="alx_certificate.png" class="certificate-link">
+        <img src="alx_certificate.png" alt="ALX Software Engineering Certificate" class="certificate-thumbnail">
+      </a>
+      <a href="reco-cert.jpg" class="certificate-link">
+        <img src="reco-cert.jpg" alt="ALX Software Engineering Tutor Certificate" class="certificate-thumbnail">
+      </a>
+	  <a href="Birhan_Abuhay_Jemere_Recognition_Letter.png" class="certificate-link">
+        <img src="Birhan_Abuhay_Jemere_Recognition_Letter.png" alt="ALX Software Engineering Tutor Recognition Certificate" class="certificate-thumbnail">
+      </a>
+	  <a href="degree.png" class="certificate-link">
+        <img src="degree.png" alt="Bsc Computer Engineering Certificate" class="certificate-thumbnail">
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Get In Touch</h2>
+    <div class="contact-links">
+        <p>I'm always open to discussing new projects, teaching opportunities, or collaboration ideas. Feel free to reach out!</p>
+        <p>Email: <a href="mailto:burahabtam@gmail.com">burahabtam@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/birhan-abuhay-jemere-a30b441a3" target="_blank" rel="noopener noreferrer">linkedin.com/in/birhan-abuhay-jemere</a></p>
+        <p>GitHub: <a href="https://github.com/TgGeda" target="_blank" rel="noopener noreferrer">github.com/TgGeda</a></p>
+    </div>
+    
+    <form action="https://formspree.io/f/your_form_id" method="POST" aria-label="Contact form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="Name" placeholder="Your Name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="Email" placeholder="your.email@example.com" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="Message" rows="5" placeholder="Your message..." required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  © <span id="current-year"></span> Birhan Abuhay Jemere. All Rights Reserved.
+</footer>
+
+<!-- The Modal for viewing certificates -->
+<div id="certificateModal" class="modal">
+  <span class="close">×</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme Toggler ---
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+    themeToggleButton.addEventListener('click', () => {
+      let newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+    
+    // --- Project Filtering ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active button state
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const filter = button.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+          const tags = card.getAttribute('data-tags');
+          if (filter === 'all' || (tags && tags.includes(filter))) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // --- Certificate Modal ---
+    const modal = document.getElementById("certificateModal");
+    const modalImg = document.getElementById("modalImage");
+    const certificateLinks = document.querySelectorAll('.certificate-link');
+    const span = document.getElementsByClassName("close")[0];
+
+    certificateLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        modal.style.display = "block";
+        modalImg.src = this.href;
+      });
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the image, close it
+    modal.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // --- Footer Year ---
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  });
+</script>
+
+</body>
+</html>
